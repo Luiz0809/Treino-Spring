@@ -2,14 +2,14 @@ package com.example.treinospring.entidades;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Cliente")
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -24,6 +24,8 @@ public class Cliente implements Serializable {
     private String Endereco;
     private Long agencia;
     private Long conta;
+    @OneToMany(mappedBy = "cliente")
+    private List<ContaCorrente> contaCorrente = new ArrayList<>();
 
     public Cliente(){
     }
@@ -101,6 +103,10 @@ public class Cliente implements Serializable {
 
     public void setConta(Long conta) {
         this.conta = conta;
+    }
+
+    public List<ContaCorrente> getContaCorrente() {
+        return contaCorrente;
     }
 
     @Override
