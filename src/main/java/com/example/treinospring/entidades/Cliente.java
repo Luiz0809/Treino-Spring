@@ -23,9 +23,6 @@ public class Cliente implements Serializable {
     private String email;
     private String telefone;
     private String Endereco;
-    private Long agencia;
-    private Long conta;
-
     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<ContaCorrente> contaCorrente = new ArrayList<>();
@@ -33,15 +30,13 @@ public class Cliente implements Serializable {
     public Cliente(){
     }
 
-    public Cliente(Long id, String nome, String CPF, String email, String telefone, String endereco, Long agencia, Long conta) {
+    public Cliente(Long id, String nome, String CPF, String email, String telefone, String endereco) {
         this.id = id;
         this.nome = nome;
         this.CPF = CPF;
         this.email = email;
         this.telefone = telefone;
         Endereco = endereco;
-        this.agencia = agencia;
-        this.conta = conta;
     }
 
     public Long getId() {
@@ -90,22 +85,6 @@ public class Cliente implements Serializable {
 
     public void setEndereco(String endereco) {
         Endereco = endereco;
-    }
-
-    public Long getAgencia() {
-        return agencia;
-    }
-
-    public void setAgencia(Long agencia) {
-        this.agencia = agencia;
-    }
-
-    public Long getConta() {
-        return conta;
-    }
-
-    public void setConta(Long conta) {
-        this.conta = conta;
     }
 
     public List<ContaCorrente> getContaCorrente() {
