@@ -1,5 +1,7 @@
 package com.example.treinospring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -19,6 +21,8 @@ public class ContaCorrente implements Serializable {
     @JoinColumn(name = "Banco_ID")
     private Banco numeroDoBanco;
     private BigDecimal saldo;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'",timezone = "GMT")
     private Instant dataUsuario;
 
     @ManyToOne

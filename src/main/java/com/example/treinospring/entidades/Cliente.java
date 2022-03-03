@@ -1,5 +1,6 @@
 package com.example.treinospring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.*;
@@ -24,6 +25,8 @@ public class Cliente implements Serializable {
     private String Endereco;
     private Long agencia;
     private Long conta;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<ContaCorrente> contaCorrente = new ArrayList<>();
 
