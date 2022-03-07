@@ -1,9 +1,6 @@
 package com.example.treinospring.config;
 
-import com.example.treinospring.entidades.Banco;
-import com.example.treinospring.entidades.Cliente;
-import com.example.treinospring.entidades.ContaCorrente;
-import com.example.treinospring.entidades.Transacao;
+import com.example.treinospring.entidades.*;
 import com.example.treinospring.entidades.enums.TipoTransacao;
 import com.example.treinospring.repositorio.BancoRepositorio;
 import com.example.treinospring.repositorio.ClienteRepositorio;
@@ -57,6 +54,11 @@ public class TestConfig implements CommandLineRunner {
         clienteRepositorio.saveAll(Arrays.asList(c1,c2));
         contaCorrenteRepositorio.saveAll(Arrays.asList(cc1,cc2,cc3,cc4));
         transacaoRepositorio.saveAll(Arrays.asList(t1,t2,t3));
+
+        StatusPagamento sp1 = new StatusPagamento(null,Instant.parse("2022-03-03T10:31:55Z"), t1);
+        t1.setStatusPagamento(sp1);
+
+        transacaoRepositorio.save(t1);
 
 
     }

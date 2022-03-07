@@ -1,6 +1,7 @@
 package com.example.treinospring.entidades;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
 import java.io.Serializable;

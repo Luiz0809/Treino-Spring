@@ -3,13 +3,16 @@ package com.example.treinospring.entidades;
 import com.example.treinospring.entidades.enums.TipoTransacao;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Transacao")
-public class Transacao {
+public class Transacao implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +25,8 @@ public class Transacao {
     private ContaCorrente contaDestino;
     private BigDecimal valor;
     private Integer tipoTransacao;
+    @OneToOne(mappedBy = "transacao", cascade = CascadeType.ALL)//Mapeando as entidades para terem o mesmo ID
+    private StatusPagamento statusPagamento;
 
     public Transacao(Long id, Instant dataTransacao, ContaCorrente contaOrigem, ContaCorrente contaDestino, BigDecimal valor, TipoTransacao tipoTransacao) {
         this.id = id;
@@ -83,6 +88,14 @@ public class Transacao {
         if (tipoTransacao != null) {
             this.tipoTransacao = tipoTransacao.getCodigo();
         }
+    }
+
+    public StatusPagamento getStatusPagamento() {
+        return statusPagamento;
+    }
+
+    public void setStatusPagamento(StatusPagamento statusPagamento) {
+        this.statusPagamento = statusPagamento;
     }
 
     @Override
