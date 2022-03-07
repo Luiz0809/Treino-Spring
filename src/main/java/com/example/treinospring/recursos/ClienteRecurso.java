@@ -36,6 +36,11 @@ public class ClienteRecurso {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(objeto.getId()).toUri();
         return ResponseEntity.created(uri).body(objeto);
+    }
 
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id){
+        service.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
