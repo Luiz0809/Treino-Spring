@@ -30,4 +30,18 @@ public class ClienteService {
     public void deletar(Long id){
         repositorio.deleteById(id);
     }
+
+    public Cliente atualizar(Long id, Cliente objeto){
+        Cliente entidade = repositorio.getOne(id);
+        atualizarDados(entidade, objeto);
+        return repositorio.save(entidade);
+    }
+
+    private void atualizarDados(Cliente entidade, Cliente objeto) {
+        entidade.setNome(objeto.getNome());
+        entidade.setEmail(objeto.getEmail());
+        entidade.setTelefone(objeto.getTelefone());
+        entidade.setEndereco(objeto.getEndereco());
+
+    }
 }
