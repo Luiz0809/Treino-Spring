@@ -41,6 +41,8 @@ public class ContaCorrente implements Serializable {
         this.cliente = cliente;
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -96,6 +98,8 @@ public class ContaCorrente implements Serializable {
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,7 @@
 package com.example.treinospring.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.Instant;
@@ -16,6 +18,7 @@ public class StatusPagamento implements Serializable {
     private Long id;
     private Instant momento;
 
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Transacao transacao;

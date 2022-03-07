@@ -39,6 +39,37 @@ public class Transacao implements Serializable {
 
     public Transacao() {
     }
+    
+    public BigDecimal getSaque(){
+        if(contaOrigem.getSaldo().compareTo(valor) >= 0){
+            return contaOrigem.getSaldo().subtract(valor);
+        }
+        else {
+            return contaOrigem.getSaldo();
+        }
+
+    }
+
+    public BigDecimal getDeposito(){
+        return contaDestino.getSaldo().add(valor);
+    }
+
+    public BigDecimal getPIX() {
+        if(contaOrigem.getSaldo().compareTo(valor) >= 0){
+            return contaDestino.getSaldo().add(valor);
+        }
+        return contaOrigem.getSaldo().subtract(valor);
+    }
+
+    public BigDecimal getTED() {
+        if(contaOrigem.getSaldo().compareTo(valor) >= 0){
+            return contaDestino.getSaldo().add(valor);
+        }
+        return contaOrigem.getSaldo().subtract(valor.add(valor.multiply(new BigDecimal(0.15))));
+    }
+
+
+
 
     public Long getId() {
         return id;
