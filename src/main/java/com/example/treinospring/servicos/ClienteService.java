@@ -22,4 +22,8 @@ public class ClienteService {
         Optional<Cliente> objeto = repositorio.findById(id);
         return objeto.get();
     }
+
+    public Cliente inserir(Cliente objeto){
+        return repositorio.save(objeto);
+    }
 }

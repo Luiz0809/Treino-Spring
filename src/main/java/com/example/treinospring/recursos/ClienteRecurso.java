@@ -5,11 +5,10 @@ import com.example.treinospring.entidades.Cliente;
 import com.example.treinospring.servicos.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -29,5 +28,14 @@ public class ClienteRecurso {
     public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id){
         Cliente objeto = service.buscarPorId(id);
         return ResponseEntity.ok().body(objeto);
+    }
+
+    @PostMapping
+    public ResponseEntity<Cliente> inserir(@RequestBody Cliente objeto){
+        objeto = service.inserir(objeto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(objeto.getId()).toUri();
+        return ResponseEntity.created(uri).body(objeto);
+
     }
 }
