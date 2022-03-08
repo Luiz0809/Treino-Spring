@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,9 +43,13 @@ public class ClienteService {
     }
 
     public Cliente atualizar(Long id, Cliente objeto){
-        Cliente entidade = repositorio.getOne(id);
-        atualizarDados(entidade, objeto);
-        return repositorio.save(entidade);
+        try {
+            Cliente entidade = repositorio.getOne(id);
+            atualizarDados(entidade, objeto);
+            return repositorio.save(entidade);
+        } catch (EntityNotFoundException e){
+            throw new RecursoNaoEncontradoException(id);
+        }
     }
 
     private void atualizarDados(Cliente entidade, Cliente objeto) {
