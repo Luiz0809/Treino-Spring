@@ -2,8 +2,11 @@ package com.example.treinospring.servicos;
 
 import com.example.treinospring.entidades.Cliente;
 import com.example.treinospring.repositorio.ClienteRepositorio;
+import com.example.treinospring.servicos.exceptions.BancoDeDadosException;
 import com.example.treinospring.servicos.exceptions.RecursoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +32,13 @@ public class ClienteService {
     }
 
     public void deletar(Long id){
-        repositorio.deleteById(id);
+        try {
+            repositorio.deleteById(id);
+        } catch (EmptyResultDataAccessException e){
+            throw new RecursoNaoEncontradoException(id);
+        } catch (DataIntegrityViolationException e){
+            throw new BancoDeDadosException(e.getMessage());
+        }
     }
 
     public Cliente atualizar(Long id, Cliente objeto){
