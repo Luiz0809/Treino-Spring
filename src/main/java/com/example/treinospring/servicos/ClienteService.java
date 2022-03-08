@@ -2,6 +2,7 @@ package com.example.treinospring.servicos;
 
 import com.example.treinospring.entidades.Cliente;
 import com.example.treinospring.repositorio.ClienteRepositorio;
+import com.example.treinospring.servicos.exceptions.RecursoNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class ClienteService {
 
     public Cliente buscarPorId(Long id){
         Optional<Cliente> objeto = repositorio.findById(id);
-        return objeto.get();
+        return objeto.orElseThrow(()-> new RecursoNaoEncontradoException(id));
     }
 
     public Cliente inserir(Cliente objeto){
