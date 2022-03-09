@@ -1,0 +1,6 @@
+postgres://
+yoxvcwsrzdobnk
+7f6ff01f5f6e526bbab47950fa322eb5fa5c1396ce040727218d2bb22a6ff17c
+ec2-3-230-238-86.compute-1.amazonaws.com
+5432
+d2tifhhts6mt07
