@@ -4,3 +4,4 @@ yoxvcwsrzdobnk
 ec2-3-230-238-86.compute-1.amazonaws.com
 5432
 d2tifhhts6mt07
+https://lf-bank.herokuapp.com/
