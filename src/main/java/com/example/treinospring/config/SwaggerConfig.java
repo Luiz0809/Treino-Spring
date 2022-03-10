@@ -19,9 +19,10 @@ public class SwaggerConfig {
     public Docket TreinoSpringApi() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.any())
-                .build();
+                .apis(RequestHandlerSelectors.basePackage("com.example.treinospring"))
+                .paths(PathSelectors.ant("/**"))
+                .build()
+                .ignoredParameterTypes(Cliente.class);
     }
         }
 
